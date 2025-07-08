@@ -6,7 +6,6 @@ import (
 	"slices"
 	"strconv"
 	"strings"
-	"time"
 )
 
 // 2T(n/2) -> O(log n)
@@ -392,33 +391,4 @@ func generateRandomArray(size, maxValue int) []int {
 		arr[i] = rand.Intn(maxValue)
 	}
 	return arr
-}
-
-func benchmarkSorts() {
-	sizes := []int{1000, 10000, 100000, 1000000}
-	maxValue := 10000
-
-	for _, size := range sizes {
-		arr := generateRandomArray(size, maxValue)
-		fmt.Printf("\n🔹 Benchmark for array size: %d\n", size)
-
-		// اجرای کد اول
-		start := time.Now()
-		_ = countSort(arr)
-		duration1 := time.Since(start)
-		fmt.Printf("⚙️ countSort duration: %v\n", duration1)
-
-		// اجرای کد دوم
-		start = time.Now()
-		_ = countingSortFor(arr)
-		duration2 := time.Since(start)
-		fmt.Printf("⚙️ countingSortFor duration: %v\n", duration2)
-
-		// مقایسه نتایج
-		if duration1 < duration2 {
-			fmt.Println("✅ countSort (prefix sum) is faster")
-		} else {
-			fmt.Println("✅ countingSortFor (simple) is faster")
-		}
-	}
 }
